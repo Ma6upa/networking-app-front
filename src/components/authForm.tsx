@@ -21,8 +21,8 @@ const AuthForm = () => {
     const target = event.currentTarget as HTMLFormElement;
     const data = new FormData(target);
     const userData = {
-      login: data.get('login'),
-      password: data.get('password'),
+      login: data.get('login')?.toString() || null,
+      password: data.get('password')?.toString() || null,
     }
     console.log(userData)
   }

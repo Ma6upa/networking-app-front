@@ -11,20 +11,22 @@ import {
 } from "@mui/material"
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useActions } from "../hooks/useActions";
 
 const RegistrationForm = () => {
   const theme = createTheme();
   const [alreadySingedUp, setAlreadySignedUp] = useState(false)
+  const { registrationRequest } = useActions()
 
   const handleSubmit = (event: React.SyntheticEvent) => {
     event.preventDefault();
     const target = event.currentTarget as HTMLFormElement;
     const data = new FormData(target);
     const userData = {
-      login: data.get('login'),
-      password: data.get('password'),
+      email: data.get('email')?.toString() || null,
+      password: data.get('password')?.toString() || null,
     }
-    console.log(userData)
+    registrationRequest(userData)
   }
 
   return (
@@ -47,9 +49,9 @@ const RegistrationForm = () => {
               margin="normal"
               required
               fullWidth
-              id="login"
-              label="Логин"
-              name="login"
+              id="email"
+              label="E-mail"
+              name="email"
               autoFocus
             />
             <TextField
