@@ -1,8 +1,16 @@
 import React from 'react';
+import { Route, Routes } from "react-router-dom";
+import { AuthPage } from './pages/AuthPage';
+import { RegistrationPage } from './pages/RegistrationPage';
 
 function App() {
   return (
-    <div>App is working</div>
+    <>
+      <Routes>
+        <Route path="/" element={<AuthPage />}/>
+        <Route path="/registration" element={<RegistrationPage />}/>
+      </Routes>
+    </>
   );
 }
 
