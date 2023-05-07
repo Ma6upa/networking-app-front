@@ -10,34 +10,21 @@ import {
   createTheme,
 } from "@mui/material"
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-const SignUpForm = () => {
-  const dispatch = useDispatch();
-  const users = useSelector(state => state.usersReducer.users);
+const RegistrationForm = () => {
   const theme = createTheme();
   const [alreadySingedUp, setAlreadySignedUp] = useState(false)
 
-  const addUser = (userData) => {
-    users.some(e => {
-      if (e.login === userData.login && e.password === userData.password) {
-        setAlreadySignedUp(true)
-        return;
-      } else {
-        dispatch({ type: "ADD_USER", payload: userData })
-      }
-    })
-  }
-
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.SyntheticEvent) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    addUser({
-      id: Date.now(),
+    const target = event.currentTarget as HTMLFormElement;
+    const data = new FormData(target);
+    const userData = {
       login: data.get('login'),
       password: data.get('password'),
-    })
+    }
+    console.log(userData)
   }
 
   return (
@@ -103,4 +90,4 @@ const SignUpForm = () => {
   )
 }
 
-export { SignUpForm }
+export { RegistrationForm }
