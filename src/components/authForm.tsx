@@ -11,20 +11,22 @@ import {
 } from "@mui/material"
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useActions } from "../hooks/useActions";
 
 const AuthForm = () => {
   const theme = createTheme();
   const [noUser, setNoUser] = useState(false);
+  const { authRequest } = useActions()
 
   const handleSubmit = (event: React.SyntheticEvent) => {
     event.preventDefault();
     const target = event.currentTarget as HTMLFormElement;
     const data = new FormData(target);
     const userData = {
-      login: data.get('login')?.toString() || null,
+      email: data.get('email')?.toString() || null,
       password: data.get('password')?.toString() || null,
     }
-    console.log(userData)
+    authRequest(userData)
   }
 
   return (
@@ -47,9 +49,9 @@ const AuthForm = () => {
               margin="normal"
               required
               fullWidth
-              id="login"
-              label="Логин"
-              name="login"
+              id="email"
+              label="E-Mail"
+              name="email"
               autoFocus
             />
             <TextField
