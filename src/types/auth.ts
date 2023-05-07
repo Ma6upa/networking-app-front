@@ -5,7 +5,10 @@ export enum authActionTypes {
 }
 
 export interface AuthState {
-  message: string;
+  userData: {
+    userId: string | null
+    token: string | null
+  };
   loading: boolean;
   error: null | string
 }
@@ -16,7 +19,10 @@ interface AuthRequestAction {
 
 interface AuthRequestSuccessAction {
   type: authActionTypes.AUTH_REQUEST_SUCCESS
-  payload: string
+  payload: {
+    userId: string | null
+    token: string | null
+  };
 }
 
 interface AuthRequestErrorAction {

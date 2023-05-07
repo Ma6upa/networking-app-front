@@ -15,7 +15,8 @@ export const authRequest = (userData: UserData) => {
         email: userData.email,
         password: userData.password
       })
-      dispatch({ type: authActionTypes.AUTH_REQUEST_SUCCESS, payload: response.data.message })
+      document.cookie = `token=${response.data.token}; expires=${new Date(2024, 0, 1)}`
+      dispatch({ type: authActionTypes.AUTH_REQUEST_SUCCESS, payload: response.data })
     } catch (e) {
       dispatch({
         type: authActionTypes.AUTH_REQUEST_ERROR,

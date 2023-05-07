@@ -7,7 +7,6 @@ interface UserData {
   password: string | null
 }
 
-
 export const registrationRequest = (userData: UserData) => {
   return async (dispatch: Dispatch<RegistrationAction>) => {
     try {
