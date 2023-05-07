@@ -73,7 +73,7 @@ const AuthForm = () => {
             </Button>
             <Grid container>
               <Grid item>
-                <Link to={'/signUp'}>
+                <Link to={'/registration'}>
                   У вас еще нет аккаунта? Зарегистрируйтесь
                 </Link>
               </Grid>
