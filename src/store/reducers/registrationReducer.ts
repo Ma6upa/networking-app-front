@@ -6,7 +6,7 @@ const initialState: RegistrationState = {
   error: null
 }
 
-export const userReducer = (state = initialState, action: RegistrationAction): RegistrationState => {
+export const registrationReducer = (state = initialState, action: RegistrationAction): RegistrationState => {
   switch (action.type) {
     case registrationActionTypes.REGISTRATION_REQUEST:
       return { loading: true, error: null, message: '' }

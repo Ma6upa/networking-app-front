@@ -10,7 +10,7 @@ const initialState: AuthState = {
   error: null
 }
 
-export const userReducer = (state = initialState, action: AuthAction): AuthState => {
+export const authReducer = (state = initialState, action: AuthAction): AuthState => {
   switch (action.type) {
     case authActionTypes.AUTH_REQUEST:
       return { loading: true, error: null, userData: {userId: null, token: null} }
