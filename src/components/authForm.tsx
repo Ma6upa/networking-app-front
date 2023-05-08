@@ -9,14 +9,22 @@ import {
   Typography,
   createTheme,
 } from "@mui/material"
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useActions } from "../hooks/useActions";
+import { useTypedSelector } from "../hooks/useTypedSelector";
 
 const AuthForm = () => {
   const theme = createTheme();
-  const [noUser, setNoUser] = useState(false);
   const { authRequest } = useActions()
+  const {userData, error, loading} = useTypedSelector(state => state.auth)
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (userData.userId) {
+      navigate(`/user/${userData.userId}`)
+    }
+  }, [userData])
 
   const handleSubmit = (event: React.SyntheticEvent) => {
     event.preventDefault();
@@ -78,10 +86,10 @@ const AuthForm = () => {
                 </Link>
               </Grid>
             </Grid>
-            {noUser && (
+            {error && (
               <Box>
-                <Typography component="h2" variant="h6">
-                  Такого пользователя не существует, пожалуйста <Link to={'/registration'}>Зарегистрируйтесь</Link>
+                <Typography component="h2" variant="h6" color={'red'}>
+                  {error}
                 </Typography>
               </Box>
             )}
