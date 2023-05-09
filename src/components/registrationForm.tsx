@@ -10,15 +10,24 @@ import {
   Typography,
   createTheme,
 } from "@mui/material"
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useActions } from "../hooks/useActions";
+import { useTypedSelector } from "../hooks/useTypedSelector";
 
 const RegistrationForm = () => {
   const theme = createTheme();
-  const { registrationRequest } = useActions()
+  const { registrationRequest } = useActions();
+  const { message } = useTypedSelector(state => state.registration);
   const reader = new FileReader();
-  const [avatar, setAvatar] = useState<string>('/avatarDefault.jpg')
+  const [avatar, setAvatar] = useState<string>('/avatarDefault.jpg');
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (message !== '') {
+      navigate(`/`)
+    }
+  }, [message])
 
   const convertDate = (dateString: string | null) => {
     if (dateString) {
@@ -69,7 +78,7 @@ const RegistrationForm = () => {
               width: 200,
               height: 200,
               borderRadius: 100
-            }}/>
+            }} />
           </Box>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
