@@ -17,15 +17,6 @@ export const registrationRequest = (userData: UserData) => {
   return async (dispatch: Dispatch<RegistrationAction>) => {
     try {
       dispatch({ type: registrationActionTypes.REGISTRATION_REQUEST })
-      const response = await axios.post("/api/auth/register", {
-        email: userData.email,
-        password: userData.password,
-        firstName: userData.firstName,
-        lastName: userData.lastName,
-        birthDate: userData.birthDate,
-        city: userData.city,
-        university: userData.university,
-      })
       if (userData.avatar) {
         let formData = new FormData()
         formData.append('avatar', userData.avatar)
@@ -37,6 +28,15 @@ export const registrationRequest = (userData: UserData) => {
           }
         )
       }
+      const response = await axios.post("/api/auth/register", {
+        email: userData.email,
+        password: userData.password,
+        firstName: userData.firstName,
+        lastName: userData.lastName,
+        birthDate: userData.birthDate,
+        city: userData.city,
+        university: userData.university,
+      })
       dispatch({ type: registrationActionTypes.REGISTRATION_REQUEST_SUCCESS, payload: response.data.message })
     } catch (e) {
       dispatch({
