@@ -10,7 +10,7 @@ interface UserData {
   birthDate: string | null,
   city: string | null,
   university: string | null,
-  avatar: File | null
+  avatar: FormDataEntryValue | null
 }
 
 export const registrationRequest = (userData: UserData) => {
@@ -25,8 +25,18 @@ export const registrationRequest = (userData: UserData) => {
         birthDate: userData.birthDate,
         city: userData.city,
         university: userData.university,
-        avatar: userData.avatar
       })
+      if (userData.avatar) {
+        let formData = new FormData()
+        formData.append('avatar', userData.avatar)
+        await axios.post("/api/auth/upload", formData,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          }
+        )
+      }
       dispatch({ type: registrationActionTypes.REGISTRATION_REQUEST_SUCCESS, payload: response.data.message })
     } catch (e) {
       dispatch({

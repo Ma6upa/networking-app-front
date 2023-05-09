@@ -19,7 +19,6 @@ const RegistrationForm = () => {
   const { registrationRequest } = useActions()
   const reader = new FileReader();
   const [avatar, setAvatar] = useState<string>('/avatarDefault.jpg')
-  const [file, setFile] = useState<File | null>(null)
 
   const convertDate = (dateString: string | null) => {
     if (dateString) {
@@ -40,7 +39,7 @@ const RegistrationForm = () => {
       birthDate: convertDate(data.get('birthDate')?.toString() || null) || null,
       city: data.get('city')?.toString() || null,
       university: data.get('university')?.toString() || null,
-      avatar: file
+      avatar: data.get('userPic') || null
     }
     registrationRequest(userData)
   }
@@ -146,9 +145,10 @@ const RegistrationForm = () => {
               <input
                 type="file"
                 accept="image/*"
+                name="userPic"
+                id="userPic"
                 onChange={(e) => {
                   const file = e.target.files![0];
-                  setFile(file)
                   reader.readAsDataURL(file)!
                   reader.onloadend = () => {
                     setAvatar(reader.result as string)
