@@ -1,19 +1,60 @@
-import { UserAction, UserActionTypes, UserState } from "../../types/user"
+import { UserAction, UserState, fetchUserActionTypes } from "../../types/user"
 
 const initialState: UserState = {
-  users: [],
+  user: {
+    id: '',
+    email: '',
+    firstName: null,
+    lastName: null,
+    avatarPath: null,
+    birthDate: null,
+    city: null,
+  },
   loading: false,
   error: null
 }
 
 export const userReducer = (state = initialState, action: UserAction): UserState => {
   switch (action.type) {
-    case UserActionTypes.FETCH_USERS:
-      return { loading: true, error: null, users: [] }
-    case UserActionTypes.FETCH_USERS_SUCCESS:
-      return { loading: false, error: null, users: action.payload }
-    case UserActionTypes.FETCH_USERS_ERROR:
-      return { loading: false, error: action.payload, users: [] }
+    case fetchUserActionTypes.FETCH_USER:
+      return {
+        loading: true, error: null,
+        user: {
+          id: '',
+          email: '',
+          firstName: null,
+          lastName: null,
+          avatarPath: null,
+          birthDate: null,
+          city: null,
+        },
+      }
+    case fetchUserActionTypes.FETCH_USER_SUCCESS:
+      return {
+        loading: false, error: null,
+        user: {
+          id: action.payload.id,
+          email: action.payload.email,
+          firstName: action.payload.firstName,
+          lastName: action.payload.lastName,
+          avatarPath: action.payload.avatarPath,
+          birthDate: action.payload.birthDate,
+          city: action.payload.city,
+        },
+      }
+    case fetchUserActionTypes.FETCH_USER_ERROR:
+      return {
+        loading: false, error: action.payload,
+        user: {
+          id: '',
+          email: '',
+          firstName: null,
+          lastName: null,
+          avatarPath: null,
+          birthDate: null,
+          city: null,
+        },
+      }
     default:
       return state
   }

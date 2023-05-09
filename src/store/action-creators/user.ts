@@ -1,17 +1,22 @@
 import { Dispatch } from "redux"
-import { UserAction, UserActionTypes } from "../../types/user"
 import axios from "axios"
+import { UserAction, fetchUserActionTypes } from "../../types/user"
 
-export const fetchUsers = () => {
+export const fetchUser = (id: string) => {
   return async (dispatch: Dispatch<UserAction>) => {
     try {
-      dispatch({ type: UserActionTypes.FETCH_USERS })
-      const response = await axios.get("https://jsonplaceholder.typicode.com/users")
-      dispatch({ type: UserActionTypes.FETCH_USERS_SUCCESS, payload: response.data })
+      dispatch({ type: fetchUserActionTypes.FETCH_USER })
+      const response = await axios.get("/api/user/user", {
+        params: {
+          userId: id
+        }
+      })
+      console.log(response.data)
+      dispatch({ type: fetchUserActionTypes.FETCH_USER_SUCCESS, payload: response.data })
     } catch (e) {
       dispatch({
-        type: UserActionTypes.FETCH_USERS_ERROR,
-        payload: 'Произошла ошибка при загрузке пользователей'
+        type: fetchUserActionTypes.FETCH_USER_ERROR,
+        payload: 'Произошла ошибка при загрузке данных пользователя'
       })
     }
   }
