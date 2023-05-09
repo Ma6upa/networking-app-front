@@ -9,6 +9,7 @@ const initialState: UserState = {
     avatarPath: null,
     birthDate: null,
     city: null,
+    university: null,
   },
   loading: false,
   error: null
@@ -27,6 +28,7 @@ export const userReducer = (state = initialState, action: UserAction): UserState
           avatarPath: null,
           birthDate: null,
           city: null,
+          university: null,
         },
       }
     case fetchUserActionTypes.FETCH_USER_SUCCESS:
@@ -40,6 +42,7 @@ export const userReducer = (state = initialState, action: UserAction): UserState
           avatarPath: action.payload.avatarPath,
           birthDate: action.payload.birthDate,
           city: action.payload.city,
+          university: action.payload.university,
         },
       }
     case fetchUserActionTypes.FETCH_USER_ERROR:

@@ -13,6 +13,7 @@ export interface UserState {
     avatarPath?: string | null;
     birthDate?: string | null;
     city?: string | null;
+    university?: string | null;
   }
   loading: boolean;
   error: string | null
@@ -32,6 +33,7 @@ interface FetchUserSuccessAction {
     avatarPath?: string | null;
     birthDate?: string | null;
     city?: string | null;
+    university?: string | null;
   }
 }
 

@@ -11,7 +11,6 @@ export const fetchUser = (id: string) => {
           userId: id
         }
       })
-      console.log(response.data)
       dispatch({ type: fetchUserActionTypes.FETCH_USER_SUCCESS, payload: response.data })
     } catch (e) {
       dispatch({
