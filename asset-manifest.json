@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/networking-app-front/static/js/main.862ccd0e.js",
+    "index.html": "/networking-app-front/index.html",
+    "main.862ccd0e.js.map": "/networking-app-front/static/js/main.862ccd0e.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.862ccd0e.js"
+  ]
+}
