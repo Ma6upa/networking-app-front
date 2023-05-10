@@ -3,13 +3,29 @@ import {
   Box,
   Container,
   Typography,
-  createTheme,
   TextField,
   Button
 } from '@mui/material';
+import { useActions } from '../hooks/useActions';
+import { useTypedSelector } from '../hooks/useTypedSelector';
 
 const PostForm = () => {
-  const theme = createTheme();
+  const { createPost } = useActions();
+  const { user } = useTypedSelector(state => state.user);
+
+  const handleSubmit = (event: React.SyntheticEvent) => {
+    event.preventDefault();
+    const target = event.currentTarget as HTMLFormElement;
+    const data = new FormData(target);
+    const postData = {
+      postText: data.get('postText')?.toString()!,
+      id: user.id,
+      name: `${user.firstName && user.firstName} ${user.lastName && user.lastName}`,
+      postPic: data.get('postPic') || null
+    }
+    if(!postData.postText) return
+    createPost(postData)
+  }
 
   return (
     <Container component="main" maxWidth="md">
@@ -20,6 +36,7 @@ const PostForm = () => {
           border: '1px dashed lightgray',
           padding: 2,
         }}
+        component="form" onSubmit={handleSubmit} noValidate
       >
         <Typography component="h2" variant="h6">
           Создать пост
@@ -33,6 +50,7 @@ const PostForm = () => {
           label="Расскажите, о чем вы думаете"
           name="postText"
           autoFocus
+          required
         />
         <Box sx={{
           display: 'flex',
@@ -49,9 +67,6 @@ const PostForm = () => {
               accept="image/*"
               name="postPic"
               id="postPic"
-              onChange={(e) => {
-                const file = e.target.files![0];
-              }}
               hidden
             />
           </Button>

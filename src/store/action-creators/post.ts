@@ -1,0 +1,42 @@
+import { Dispatch } from "redux"
+import axios from "axios"
+import { PostAction, postsActionTypes } from "../../types/post"
+
+interface PostData {
+  postText: string,
+  id: string,
+  name: string,
+  postPic: FormDataEntryValue | null
+}
+
+export const createPost = (postData: PostData) => {
+  return async (dispatch: Dispatch<PostAction>) => {
+    try {
+      dispatch({ type: postsActionTypes.CREATE_POST })
+      if (postData.postPic) {
+        let formData = new FormData()
+        formData.append('postPic', postData.postPic)
+        await axios.post("/api/posts/uploadPostPic", formData,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          }
+        )
+      }
+      const response = await axios.post("/api/posts/createPost", {
+        postText: postData.postText,
+        author: {
+          id: postData.id,
+          name: postData.name
+        }
+      })
+      dispatch({ type: postsActionTypes.CREATE_POST_SUCCESS, payload: response.data.message })
+    } catch (e) {
+      dispatch({
+        type: postsActionTypes.CREATE_POST_ERROR,
+        payload: 'Произошла ошибка при создании поста'
+      })
+    }
+  }
+}
