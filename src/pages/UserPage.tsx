@@ -6,10 +6,12 @@ import {
   Box,
   Container,
   CssBaseline,
+  Divider,
   ThemeProvider,
   Typography,
   createTheme
 } from '@mui/material';
+import PostForm from '../components/postForm';
 
 const UserPage = () => {
   const { id } = useParams();
@@ -23,7 +25,7 @@ const UserPage = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="lg">
+      <Container component="main" maxWidth="md">
         <CssBaseline />
         <Box
           sx={{
@@ -64,6 +66,17 @@ const UserPage = () => {
                 </Typography>
               )}
             </Box>
+          </Box>
+          <Box
+            sx={{
+              marginTop: 5,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              width: '100%'
+            }}
+          >
+            <PostForm />
           </Box>
         </Box>
       </Container>
