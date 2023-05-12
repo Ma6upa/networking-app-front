@@ -15,12 +15,13 @@ import PostForm from '../components/postForm';
 
 const UserPage = () => {
   const { id } = useParams();
-  const { fetchUser } = useActions();
+  const { fetchUser, fetchPosts } = useActions();
   const { user } = useTypedSelector(state => state.user);
   const theme = createTheme();
 
   useEffect(() => {
     fetchUser(id!)
+    fetchPosts(id!)
   }, [])
 
   return (
