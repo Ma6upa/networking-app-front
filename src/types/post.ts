@@ -13,7 +13,7 @@ export interface PostState {
 }
 
 export interface Post {
-  id: string,
+  _id: string,
   postText: string,
   postPathToImg: string,
   author: {
