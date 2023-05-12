@@ -17,12 +17,14 @@ const UserPage = () => {
   const { id } = useParams();
   const { fetchUser, fetchPosts } = useActions();
   const { user } = useTypedSelector(state => state.user);
+  const { posts } = useTypedSelector(state => state.post);
   const theme = createTheme();
 
   useEffect(() => {
     fetchUser(id!)
     fetchPosts(id!)
   }, [])
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -43,7 +45,7 @@ const UserPage = () => {
             alignItems: 'center',
           }}>
             <Box>
-              <img src={user.avatarPath? `/${user.avatarPath}` : '/avatarDefault.jpg'} style={{
+              <img src={user.avatarPath ? `/${user.avatarPath}` : '/avatarDefault.jpg'} style={{
                 width: 200,
                 height: 200,
                 borderRadius: 100
@@ -79,6 +81,56 @@ const UserPage = () => {
           >
             <PostForm />
           </Box>
+          <Container component="main" maxWidth="md">
+            <Box
+              sx={{
+                marginTop: 5,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                width: '100%'
+              }}
+            >
+              <Typography component="h2" variant="h4">
+                Список постов
+              </Typography>
+              {posts.map((item, index) => (
+                <Box
+                  key={item._id}
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    border: '1px solid lightgray',
+                    padding: 2,
+                    width: '100%',
+                    marginTop: 2,
+                    marginBottom: 2
+                  }}
+                >
+                  <Box>
+                    <img src={`/${item.postPathToImg}`} style={{
+                      width: 100,
+                      height: 100,
+                    }} />
+                    <Typography component="h2" variant="h6"
+                    >
+                      {item.author.name}
+                    </Typography>
+                  </Box>
+                  <Box
+                   sx={{
+                    flex: 1,
+                    textAlign: 'center'
+                   }}
+                  >
+                    <Typography component="h1" variant="h5">
+                      {item.postText}
+                    </Typography>
+                  </Box>
+                </Box>
+              ))}
+            </Box>
+          </Container>
         </Box>
       </Container>
     </ThemeProvider>
