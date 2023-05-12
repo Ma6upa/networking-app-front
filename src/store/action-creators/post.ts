@@ -40,3 +40,21 @@ export const createPost = (postData: PostData) => {
     }
   }
 }
+
+export const fetchPosts = (userId: string) => {
+  return async (dispatch: Dispatch<PostAction>) => {
+    try {
+      const response = await axios.get("/api/posts/getPosts", {
+        params: {
+          userId: userId
+        }
+      })
+      dispatch({ type: postsActionTypes.FETCH_POSTS, payload: response.data })
+    } catch (e) {
+      dispatch({
+        type: postsActionTypes.CREATE_POST_ERROR,
+        payload: 'Произошла ошибка при загрузке постов'
+      })
+    }
+  }
+}
