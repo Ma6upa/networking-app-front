@@ -1,8 +1,8 @@
 {
-  "homepage": "https://Ma6upa.github.io/networking-app-front",
+  "homepage": "http://ma6upa.github.io/networking-app-front",
   "name": "networking-app-front",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "dependencies": {
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
@@ -42,7 +42,7 @@
       "react-app/jest"
     ]
   },
-  "proxy": "http://localhost:5000",
+  "proxy": "http://localhost:80",
   "browserslist": {
     "production": [
       ">0.2%",
