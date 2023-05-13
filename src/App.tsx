@@ -1,5 +1,4 @@
-import React from 'react';
-import { useEffect } from 'react'
+import React, { useEffect } from 'react';
 import { Link, Route, Routes } from "react-router-dom";
 import {
   AppBar,
@@ -12,15 +11,13 @@ import { UserPage } from './pages/UserPage';
 import FeedPage from './pages/FeedPage';
 import FriendsPage from './pages/FriendsPage';
 import UsersPage from './pages/UsersPage';
-import { useActions } from './hooks/useActions';
 import { useTypedSelector } from './hooks/useTypedSelector';
 
 function App() {
   const { user } = useTypedSelector(state => state.user);
-
   return (
     <>
-      <AppBar position="static">
+      <AppBar position="sticky">
         <Toolbar variant="dense">
           <Link to={'/user/'+user.id} style={{ textDecoration: 'none', color: 'white' }}>
             <Typography component="h2" variant="h6">
