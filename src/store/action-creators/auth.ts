@@ -11,7 +11,7 @@ export const authRequest = (userData: UserData) => {
   return async (dispatch: Dispatch<AuthAction>) => {
     try {
       dispatch({ type: authActionTypes.AUTH_REQUEST })
-      const response = await axios.post("/api/auth/login", {
+      const response = await axios.post(process.env.REACT_APP_API_URL + "/api/auth/login", {
         email: userData.email,
         password: userData.password
       })

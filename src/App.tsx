@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link, Route, Routes } from "react-router-dom";
+import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import {
   AppBar,
   Toolbar,
@@ -14,7 +14,9 @@ import UsersPage from './pages/UsersPage';
 import { useTypedSelector } from './hooks/useTypedSelector';
 
 function App() {
+  const navigate = useNavigate()
   const { user } = useTypedSelector(state => state.user);
+
   return (
     <>
       <AppBar position="sticky">

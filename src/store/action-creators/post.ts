@@ -16,7 +16,7 @@ export const createPost = (postData: PostData) => {
       if (postData.postPic) {
         let formData = new FormData()
         formData.append('postPic', postData.postPic)
-        await axios.post("/api/posts/uploadPostPic", formData,
+        await axios.post(process.env.REACT_APP_API_URL + "/api/posts/uploadPostPic", formData,
           {
             headers: {
               'Content-Type': 'multipart/form-data'
@@ -24,7 +24,7 @@ export const createPost = (postData: PostData) => {
           }
         )
       }
-      const response = await axios.post("/api/posts/createPost", {
+      const response = await axios.post(process.env.REACT_APP_API_URL + "/api/posts/createPost", {
         postText: postData.postText,
         author: {
           id: postData.id,
@@ -44,7 +44,7 @@ export const createPost = (postData: PostData) => {
 export const fetchPosts = (userId: string) => {
   return async (dispatch: Dispatch<PostAction>) => {
     try {
-      const response = await axios.get("/api/posts/getPosts", {
+      const response = await axios.get(process.env.REACT_APP_API_URL + "/api/posts/getPosts", {
         params: {
           userId: userId
         }

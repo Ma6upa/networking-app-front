@@ -20,7 +20,7 @@ export const registrationRequest = (userData: UserData) => {
       if (userData.avatar) {
         let formData = new FormData()
         formData.append('avatar', userData.avatar)
-        await axios.post("/api/auth/upload", formData,
+        await axios.post(process.env.REACT_APP_API_URL + "/api/auth/upload", formData,
           {
             headers: {
               'Content-Type': 'multipart/form-data'
@@ -28,7 +28,7 @@ export const registrationRequest = (userData: UserData) => {
           }
         )
       }
-      const response = await axios.post("/api/auth/register", {
+      const response = await axios.post(process.env.REACT_APP_API_URL + "/api/auth/register", {
         email: userData.email,
         password: userData.password,
         firstName: userData.firstName,

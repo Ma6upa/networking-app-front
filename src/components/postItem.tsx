@@ -25,10 +25,12 @@ const PostItem: FC<PostProps> = ({
       }}
     >
       <Box>
-        <img src={`/${item.postPathToImg}`} style={{
-          width: 100,
-          height: 100,
-        }} />
+        {item.postPathToImg && (
+          <img src={process.env.REACT_APP_API_URL + `/${item.postPathToImg}`} style={{
+            width: 100,
+            height: 100,
+          }} alt="нет изображения"/>
+        )}
         <Typography component="h2" variant="h6">
           {item.author.name}
         </Typography>
