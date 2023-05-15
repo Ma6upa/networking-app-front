@@ -20,7 +20,7 @@ const RegistrationForm = () => {
   const { registrationRequest } = useActions();
   const { message } = useTypedSelector(state => state.registration);
   const reader = new FileReader();
-  const [avatar, setAvatar] = useState<string>('/avatarDefault.jpg');
+  const [avatar, setAvatar] = useState<string>(process.env.PUBLIC_URL + '/avatarDefault.jpg');
   const navigate = useNavigate()
 
   useEffect(() => {

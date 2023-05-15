@@ -46,7 +46,7 @@ const UserPage = () => {
             alignItems: 'center',
           }}>
             <Box>
-              <img src={user.avatarPath ? process.env.REACT_APP_API_URL + `/${user.avatarPath}` : '/avatarDefault.jpg'} style={{
+              <img src={user.avatarPath ? process.env.REACT_APP_API_URL + `/${user.avatarPath}` : process.env.PUBLIC_URL + '/avatarDefault.jpg'} style={{
                 width: 200,
                 height: 200,
                 borderRadius: 100
