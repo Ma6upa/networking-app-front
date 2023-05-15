@@ -6,7 +6,7 @@ export const fetchUser = (id: string) => {
   return async (dispatch: Dispatch<UserAction>) => {
     try {
       dispatch({ type: fetchUserActionTypes.FETCH_USER })
-      const response = await axios.get(process.env.REACT_APP_API_URL + "http://ma6upa.online/api/user/user", {
+      const response = await axios.get(process.env.REACT_APP_API_URL + "/api/user/user", {
         params: {
           userId: id
         }
