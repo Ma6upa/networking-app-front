@@ -10,10 +10,10 @@ import { useActions } from '../hooks/useActions';
 import { useTypedSelector } from '../hooks/useTypedSelector';
 
 const PostForm = () => {
-  const { createPost } = useActions();
+  const { createPost, fetchPosts } = useActions();
   const { user } = useTypedSelector(state => state.user);
 
-  const handleSubmit = (event: React.SyntheticEvent) => {
+  const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
     const target = event.currentTarget as HTMLFormElement;
     const data = new FormData(target);
@@ -24,7 +24,8 @@ const PostForm = () => {
       postPic: data.get('postPic') || null
     }
     if(!postData.postText) return
-    createPost(postData)
+    await createPost(postData)
+    fetchPosts(user.id)
   }
 
   return (

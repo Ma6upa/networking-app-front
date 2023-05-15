@@ -6,7 +6,6 @@ import {
   Box,
   Container,
   CssBaseline,
-  Divider,
   ThemeProvider,
   Typography,
   createTheme
@@ -25,7 +24,6 @@ const UserPage = () => {
     fetchUser(id!)
     fetchPosts(id!)
   }, [])
-
 
   return (
     <ThemeProvider theme={theme}>
